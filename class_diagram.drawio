@@ -1,0 +1,79 @@
+<mxfile host="65bd71144e">
+    <diagram name="Class Diagram" id="0">
+        <mxGraphModel dx="1157" dy="1985" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;b&gt;RateLimiterApplication&lt;/b&gt;&lt;hr/&gt;+main(String[] args)" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="-180" width="240" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;b&gt;RateLimiterConfig&lt;/b&gt;&lt;hr/&gt;+rateLimiterAlgorithm() RateLimiterAlgorithm" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="120" width="240" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;b&gt;WebMvcConfig&lt;/b&gt;&lt;hr/&gt;-rateLimitingInterceptor RateLimitingInterceptor&lt;br/&gt;+addInterceptors(InterceptorRegistry)" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="-60" width="240" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&lt;b&gt;RateLimitingInterceptor&lt;/b&gt;&lt;hr/&gt;-rateLimiter RateLimiterAlgorithm&lt;br/&gt;+preHandle(...) boolean&lt;br/&gt;-getClientKey(...) String" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="570" y="130" width="260" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;b&gt;ApiController&lt;/b&gt;&lt;hr/&gt;+getLimitedResource() ResponseEntity&lt;br/&gt;+getUnlimitedResource() ResponseEntity" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="180" width="260" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;b&gt;GreetingController&lt;/b&gt;&lt;hr/&gt;+sayHello() ResponseEntity" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="560" width="240" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="&lt;b&gt;&lt;&lt;interface&gt;&gt;&lt;br/&gt;RateLimiterAlgorithm&lt;/b&gt;&lt;hr/&gt;+isAllowed(...) boolean" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="310" width="350" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="&lt;b&gt;TokenBucketRateLimiter&lt;/b&gt;&lt;hr/&gt;-buckets Map&lt;String, Bucket&gt;&lt;br/&gt;+isAllowed(...) boolean" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="395" y="460" width="260" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;b&gt;Bucket&lt;/b&gt;&lt;hr/&gt;-capacity int&lt;br/&gt;-refillRate int&lt;br/&gt;-tokens AtomicInteger&lt;br/&gt;+tryAcquire() boolean" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="770" y="460" width="260" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="&lt;b&gt;&lt;&lt;annotation&gt;&gt;&lt;br/&gt;RateLimit&lt;/b&gt;&lt;hr/&gt;+permits() int&lt;br/&gt;+period() int&lt;br/&gt;+unit() TimeUnit" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;fillColor=#FFF2CC;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="340" width="240" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="&lt;b&gt;GlobalExceptionHandler&lt;/b&gt;&lt;hr/&gt;+handleRateLimitExceededException(RateLimitExceededException) ResponseEntity" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="970" y="290" width="300" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;b&gt;&lt;&lt;interface&gt;&gt;&lt;br/&gt;WebMvcConfigurer&lt;/b&gt;" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;dashed=1;fillColor=#E1D5E7;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="-190" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="100" value="has a" style="endArrow=block;html=1;" parent="1" source="4" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" value="has a" style="endArrow=block;html=1;" parent="1" source="5" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="102" value="creates" style="endArrow=block;html=1;" parent="1" source="3" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="implements" style="endArrow=open;html=1;" parent="1" source="9" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" value="contains" style="endArrow=block;html=1;" parent="1" source="9" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="uses" style="endArrow=open;html=1;dashed=1;" parent="1" source="6" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="106" value="uses" style="endArrow=open;html=1;dashed=1;" parent="1" source="7" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="throws" style="endArrow=open;html=1;dashed=1;" parent="1" source="5" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="handles" style="endArrow=open;html=1;dashed=1;" parent="1" source="13" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" value="implements" style="endArrow=open;html=1;" parent="1" source="4" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="&lt;b&gt;RateLimitExceededException&lt;/b&gt;&lt;hr/&gt;+RateLimitExceededException(String)" style="swimlane;fontSize=12;html=1;whiteSpace=wrap;fillColor=#F8CECC;" parent="1" vertex="1">
+                    <mxGeometry x="990" y="140" width="260" height="80" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
